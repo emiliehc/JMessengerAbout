@@ -1,6 +1,7 @@
 package me.nanjingchj.jmessenger.plugin.about
 
 import jmessenger.client.AbstractPlugin
+import jmessenger.client.Messenger
 import jmessenger.client.SplashScreen
 import jmessenger.shared.Message
 import java.awt.GridBagConstraints
@@ -26,8 +27,8 @@ class Main : AbstractPlugin() {
         c.gridx = 0
         c.gridy = 0
         c.weightx = 1.0
-        c.weighty = 0.5
-        c.ipady = -10
+        c.weighty = 0.2
+        c.ipady = 0
         c.fill = GridBagConstraints.BOTH
         val lblImg = JLabel()
         lblImg.icon = image
@@ -47,18 +48,45 @@ class Main : AbstractPlugin() {
         c.gridy = 1
         c.weightx = 1.0
         c.weighty = 0.0
-        c.ipady = 200
+        c.ipady = 0
         c.fill = GridBagConstraints.BOTH
-        pnl.add(JButton("Information"), c)
+        val lblInfo = JLabel()
+        lblInfo.text = """
+            <html>
+                <h1>&ensp
+                    JMessenger
+                </h1>
+                <h3>&emsp
+                    Version %version
+                </h3>
+                <p>&emsp&nbsp
+                    Created by
+                </p>
+                <p><b>&emsp&nbsp
+                    Frank Chen
+                </b></p>
+                <p>&emsp&nbsp
+                    and
+                </p>
+                <p><b>&emsp&nbsp
+                    Gary Gao
+                </b></p>
+                <p></p>
+                <p>&emsp&nbsp
+                    Logo and Splash Screen designed by <b>Gary Gao</b>
+                </p>
+            </html>
+        """.trimIndent().replace("%version", Messenger.version)
+        pnl.add(lblInfo, c)
 
-        // the spring
+        // the spring that pushes everything upward
         c = GridBagConstraints()
         c.gridx = 0
         c.gridy = 2
         c.weightx = 1.0
         c.weighty = 1.0
         c.fill = GridBagConstraints.BOTH
-        pnl.add(JButton("I am a spring"), c)
+        pnl.add(JLabel(), c)
         return pnl
     }
 }
